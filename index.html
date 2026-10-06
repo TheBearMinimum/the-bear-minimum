@@ -3,61 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Bear Minimum | Market Insights Without The Noise</title>
+  <title>The Bear Minimum</title>
   <style>
     :root {
-      --page-bg: #f4f3f1;
-      --ink: #1d2b3a;
-      --muted: #6d7a88;
-      --line: rgba(29, 43, 58, 0.12);
-      --panel: #e7e7e5;
-      --nav-blue: #3d5a80;
-      --shadow: rgba(12, 22, 34, 0.08);
-      --accent: #d4a574;
+      --bg: #f3f2f0;
+      --paper: #f8f8f7;
+      --panel: #e9ebea;
+      --ink: #1b2b3d;
+      --muted: #697787;
+      --line: rgba(27, 43, 61, 0.12);
+      --blue: #3f5d84;
+      --gold: #d2a463;
+      --shadow: rgba(12, 20, 31, 0.06);
+      --green-soft: rgba(56, 142, 72, 0.12);
+      --red-soft: rgba(170, 39, 39, 0.12);
     }
 
     * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      background: var(--page-bg);
-      color: var(--ink);
-      font-family: "Georgia", "Times New Roman", serif;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
     }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
     .page {
-      width: 100%;
-      flex: 1;
+      min-height: 100vh;
+      background: var(--bg);
     }
 
-    .topbar {
-      width: 100%;
+    .browser-top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       height: 44px;
+      padding: 8px 16px;
       border-bottom: 1px solid var(--line);
-      background: #f2f2f2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 14px;
+      background: rgba(244, 244, 242, 0.9);
+      backdrop-filter: blur(8px);
     }
 
     .browser-shell {
-      width: min(100%, 1100px);
-      height: 34px;
-      border-radius: 10px;
+      width: min(100%, 1180px);
+      height: 30px;
+      margin: 0 auto;
       border: 1px solid var(--line);
-      background: #f7f7f7;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.18);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -65,10 +60,11 @@
       gap: 10px;
     }
 
-    .browser-left, .browser-right {
+    .browser-left,
+    .browser-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       min-width: 110px;
     }
 
@@ -78,63 +74,59 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: #d0d0d0;
+      background: #d6d5d1;
       border: 1px solid rgba(0,0,0,0.08);
     }
 
     .address {
       flex: 1;
-      min-width: 120px;
+      max-width: 600px;
       height: 22px;
-      border-radius: 11px;
-      background: rgba(0,0,0,0.02);
+      margin: 0 auto;
       border: 1px solid var(--line);
+      background: rgba(0,0,0,0.02);
+      border-radius: 11px;
+      color: #5e6976;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
-      color: #5e6b75;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.01em;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      padding: 0 12px;
-      font-family: Arial, sans-serif;
     }
 
     .site-wrap {
-      max-width: 1400px;
+      width: min(1200px, calc(100% - 64px));
       margin: 0 auto;
-      padding: 28px 0 0;
-      width: 100%;
     }
 
     .header {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: 1.1fr 1fr 1.1fr;
       align-items: center;
-      padding: 10px 52px 0;
       min-height: 110px;
+      padding-top: 8px;
     }
 
     .brand {
-      justify-self: start;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 12px;
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      justify-self: start;
       cursor: pointer;
+      user-select: none;
     }
 
     .brand-mark {
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      background: #0f2137;
+      background: #13263c;
       position: relative;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
       overflow: hidden;
     }
 
@@ -144,10 +136,10 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: #d3a75e;
+      background: var(--gold);
       left: 13px;
       top: 14px;
-      box-shadow: -10px 0 0 -2px #d3a75e, 10px 0 0 -2px #d3a75e;
+      box-shadow: -10px 0 0 -2px var(--gold), 10px 0 0 -2px var(--gold);
     }
 
     .brand-mark::after {
@@ -157,44 +149,46 @@
       right: 7px;
       bottom: 7px;
       height: 12px;
-      background: #d3a75e;
+      background: var(--gold);
       border-radius: 50% 50% 30% 30%;
       clip-path: polygon(0 100%, 18% 0, 36% 100%, 62% 0, 82% 100%, 100% 0, 100% 100%, 0 100%);
-      opacity: 0.9;
+      opacity: 0.98;
     }
 
-    .brand-text {
+    .brand-title {
+      font-family: Arial, sans-serif;
       font-size: 17px;
-      line-height: 1;
+      line-height: 0.9;
       color: var(--ink);
-      display: flex;
-      flex-direction: column;
       font-weight: 700;
+      letter-spacing: -0.04em;
     }
 
-    .brand-text small {
+    .brand-title small {
+      display: block;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-top: 2px;
+      margin-top: 4px;
+      font-weight: 700;
     }
 
     .nav {
       display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 36px;
+      gap: 34px;
       font-family: Arial, sans-serif;
       font-size: 18px;
-      color: var(--nav-blue);
+      line-height: 1;
       font-weight: 600;
+      color: var(--blue);
+      align-items: center;
     }
 
     .nav a {
       position: relative;
-      color: var(--nav-blue);
-      text-decoration: none;
       cursor: pointer;
+      transition: opacity 0.2s ease;
     }
 
     .nav a.active {
@@ -206,20 +200,22 @@
       content: "";
       position: absolute;
       left: 0;
+      right: 0;
       bottom: -8px;
-      width: 100%;
       height: 2px;
       background: transparent;
       transition: background 0.2s ease;
     }
 
-    .nav a:hover::after, .nav a.active::after {
-      background: rgba(29, 43, 58, 0.24);
+    .nav a:hover::after,
+    .nav a.active::after {
+      background: rgba(27, 43, 61, 0.18);
     }
 
+    /* sections */
     .section {
       display: none;
-      animation: fadeIn 0.3s ease;
+      animation: fadeIn 0.25s ease;
     }
 
     .section.active {
@@ -233,47 +229,45 @@
 
     .hero {
       text-align: center;
-      padding: 62px 52px 80px;
+      padding: 44px 0 0;
+      min-height: 570px;
     }
 
-    h1 {
+    .hero h1 {
       margin: 0;
-      font-size: clamp(3.5rem, 7vw, 8rem);
-      line-height: 0.96;
       letter-spacing: -0.08em;
-      font-weight: 700;
+      font-size: clamp(4rem, 7vw, 9rem);
+      line-height: 0.9;
       color: var(--ink);
+      font-weight: 700;
     }
 
-    .subtitle {
-      margin: 30px auto 0;
+    .hero-sub {
+      margin: 32px auto 0;
       max-width: 760px;
-      font-family: Georgia, serif;
-      font-size: clamp(1.4rem, 2vw, 2.1rem);
-      line-height: 1.45;
-      color: var(--ink);
+      font-size: clamp(1.3rem, 2.2vw, 2.1rem);
+      line-height: 1.5;
       font-style: italic;
+      color: var(--ink);
       font-weight: 400;
     }
 
-    .subtitle strong {
-      font-weight: 700;
+    .hero-sub strong {
       font-style: normal;
+      font-weight: 700;
     }
 
-    .tagline {
-      margin: 20px auto 0;
-      max-width: 720px;
-      font-family: Georgia, serif;
-      font-size: 1.15rem;
+    .hero-tagline {
+      max-width: 700px;
+      margin: 18px auto 0;
+      font-size: 1.12rem;
       line-height: 1.6;
       color: var(--muted);
-      font-style: normal;
-      font-weight: 400;
+      font-family: Arial, sans-serif;
     }
 
-    .email-signup {
-      margin-top: 50px;
+    .signup {
+      margin-top: 40px;
       display: flex;
       justify-content: center;
       gap: 12px;
@@ -281,323 +275,275 @@
     }
 
     .email-input {
-      padding: 14px 18px;
+      width: min(420px, 72vw);
+      height: 52px;
       border: 1px solid var(--line);
+      padding: 0 18px;
       border-radius: 6px;
-      font-size: 1rem;
-      font-family: Arial, sans-serif;
       background: rgba(255,255,255,0.6);
       color: var(--ink);
-      min-width: 280px;
-      max-width: 380px;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
     }
 
     .email-input::placeholder {
       color: var(--muted);
     }
 
-    .email-input:focus {
-      outline: none;
-      border-color: var(--nav-blue);
-      background: rgba(255,255,255,0.9);
-    }
-
     .btn {
-      padding: 14px 32px;
+      height: 52px;
+      padding: 0 28px;
       border: none;
+      background: #1d2b3a;
+      color: white;
       border-radius: 6px;
-      font-size: 1rem;
       font-family: Arial, sans-serif;
       font-weight: 700;
       cursor: pointer;
-      transition: 0.2s ease;
-      background: var(--ink);
-      color: white;
+      transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
     .btn:hover {
-      background: #0a1620;
       transform: translateY(-1px);
+      opacity: 0.98;
     }
 
-    .hero-image {
+    .hero-visual {
       width: min(1200px, calc(100% - 40px));
       height: 290px;
-      margin: 100px auto 0;
+      margin: 86px auto 0;
       background:
-        linear-gradient(
-          to top,
-          rgba(186, 165, 131, 0.18),
-          rgba(245, 228, 193, 0.08)
-        ),
-        url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-      border-radius: 0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        linear-gradient(to top, rgba(196, 166, 120, 0.2), rgba(255,255,255,0.04)),
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.04);
     }
 
-    .latest-articles {
-      padding: 60px 52px 80px;
-      border-top: 1px solid var(--line);
+    .latest {
+      padding: 80px 0 0;
     }
 
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 700;
+    .section-head {
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: -0.06em;
+      margin: 0 0 28px;
+      line-height: 1;
       color: var(--ink);
-      margin: 0 0 40px;
+      font-weight: 700;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.34);
+      border-radius: 12px;
+      padding: 22px 22px 20px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.02);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.04);
+    }
+
+    .meta {
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: 1.55rem;
+      line-height: 1.2;
       letter-spacing: -0.04em;
     }
 
-    .article-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 28px;
-    }
-
-    .article-card {
-      background: rgba(255,255,255,0.5);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 24px;
-      transition: 0.3s ease;
-      cursor: pointer;
-    }
-
-    .article-card:hover {
-      background: rgba(255,255,255,0.7);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-      transform: translateY(-2px);
-    }
-
-    .article-date {
-      font-size: 0.85rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-family: Arial, sans-serif;
-      margin-bottom: 12px;
-    }
-
-    .article-card h3 {
-      margin: 0 0 12px;
-      font-size: 1.55rem;
-      line-height: 1.25;
-      color: var(--nav-blue);
-      font-weight: 700;
-    }
-
-    .article-card p {
+    .card p {
       margin: 0;
+      color: var(--muted);
       font-size: 1rem;
       line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .article-author {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-top: 16px;
-      font-weight: 600;
       font-family: Arial, sans-serif;
     }
 
-    .blog-wrap {
-      padding: 60px 52px 80px;
+    .card-author {
+      margin-top: 16px;
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
     }
 
-    .blog-posts {
+    .blog-wrap,
+    .invest-wrap {
+      padding-top: 48px;
+      padding-bottom: 60px;
+    }
+
+    .posts {
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 26px;
+      margin-top: 18px;
     }
 
-    .blog-post {
-      padding: 28px 0;
+    .post {
+      padding: 24px 0;
       border-bottom: 1px solid var(--line);
-      cursor: pointer;
-      transition: 0.2s ease;
+      transition: padding-left 0.2s ease;
     }
 
-    .blog-post:hover {
+    .post:hover {
       padding-left: 12px;
     }
 
-    .blog-post:last-child {
-      border-bottom: none;
-    }
+    .post:last-child { border-bottom: none; }
 
-    .blog-meta {
-      font-size: 0.85rem;
-      color: var(--muted);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-family: Arial, sans-serif;
+    .post .meta {
       margin-bottom: 10px;
     }
 
-    .blog-post h2 {
+    .post h2 {
       margin: 0 0 12px;
-      font-size: 2rem;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
       line-height: 1.2;
-      color: var(--nav-blue);
+      letter-spacing: -0.04em;
+      color: var(--blue);
       font-weight: 700;
-      letter-spacing: -0.03em;
     }
 
-    .blog-post p {
-      margin: 0 0 12px;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .read-time {
-      font-size: 0.9rem;
-      color: var(--muted);
-      font-family: Arial, sans-serif;
-    }
-
-    .invest-wrap {
-      padding: 60px 52px 80px;
-    }
-
-    .trends-section, .stocks-section {
-      margin-bottom: 80px;
-    }
-
-    .trends-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-top: 30px;
-    }
-
-    .trend-card {
-      background: rgba(255,255,255,0.5);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 28px;
-      transition: 0.3s ease;
-    }
-
-    .trend-card:hover {
-      background: rgba(255,255,255,0.7);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-    }
-
-    .trend-label {
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--nav-blue);
-      font-weight: 700;
-      font-family: Arial, sans-serif;
-      margin-bottom: 10px;
-    }
-
-    .trend-card h3 {
-      margin: 0 0 14px;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .trend-card p {
+    .post p {
       margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.6;
       color: var(--muted);
+      font-size: 1.02rem;
+      line-height: 1.6;
+      font-family: Arial, sans-serif;
     }
 
-    .stocks-grid {
+    .trend-grid,
+    .stock-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
+      gap: 24px;
+      margin-top: 24px;
     }
 
+    .trend-card,
     .stock-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+      background: rgba(255,255,255,0.38);
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 24px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.02);
+    }
+
+    .trend-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .trend-card h3,
+    .stock-symbol {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .trend-card p,
+    .stock-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      font-family: Arial, sans-serif;
+    }
+
+    .stock-card {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .stock-header {
+    .stock-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
 
-    .stock-symbol {
-      font-family: "Courier New", monospace;
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--ink);
+    .stock-name {
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 6px;
     }
 
     .stock-price {
       font-family: "Courier New", monospace;
+      font-size: 1.08rem;
+      color: var(--blue);
       font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--nav-blue);
     }
 
-    .stock-name {
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .stock-trend {
-      font-size: 0.85rem;
-      font-weight: 600;
+    .pill {
+      display: inline-flex;
+      align-items: center;
       padding: 4px 8px;
-      border-radius: 4px;
-      width: fit-content;
+      border-radius: 6px;
       font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: fit-content;
     }
 
-    .stock-trend.up {
-      background: rgba(34, 139, 34, 0.15);
-      color: #1a6b1a;
+    .pill.up {
+      background: var(--green-soft);
+      color: #1f6b35;
     }
 
-    .stock-trend.down {
-      background: rgba(178, 34, 34, 0.15);
-      color: #8b2222;
-    }
-
-    .stock-note {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.5;
-      margin-top: 8px;
+    .pill.down {
+      background: var(--red-soft);
+      color: #8b2b2b;
     }
 
     footer {
-      background: rgba(0,0,0,0.02);
       border-top: 1px solid var(--line);
-      padding: 40px 52px;
-      text-align: center;
+      padding: 28px 0 60px;
       color: var(--muted);
+      font-family: Arial, sans-serif;
+      text-align: center;
       font-size: 0.9rem;
-      margin-top: auto;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 900px) {
       .header {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 10px 24px 0;
+        gap: 18px;
+        padding-top: 14px;
       }
 
-      .brand, .nav {
+      .brand,
+      .nav {
         justify-self: center;
       }
 
@@ -606,54 +552,53 @@
         font-size: 16px;
       }
 
-      .hero, .latest-articles, .blog-wrap, .invest-wrap {
-        padding: 40px 24px 60px;
+      .hero {
+        padding-top: 28px;
+        min-height: auto;
       }
 
-      .email-input {
-        min-width: 100%;
-        max-width: 100%;
-      }
-
-      footer {
-        padding: 30px 24px;
+      .hero-visual {
+        margin-top: 54px;
+        height: 240px;
       }
     }
 
     @media (max-width: 640px) {
+      .site-wrap {
+        width: min(100%, calc(100% - 28px));
+      }
+
       .nav {
-        gap: 16px;
+        gap: 12px;
         font-size: 14px;
       }
 
-      h1 {
-        font-size: 2.3rem;
-      }
-
-      .subtitle {
-        font-size: 1.1rem;
-      }
-
-      .email-signup {
+      .signup {
         flex-direction: column;
+        align-items: center;
       }
 
-      .article-grid, .trends-grid, .stocks-grid {
-        grid-template-columns: 1fr;
+      .email-input,
+      .btn {
+        width: min(100%, 360px);
+      }
+
+      .hero h1 {
+        font-size: 2.7rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="topbar">
+    <div class="browser-top">
       <div class="browser-shell">
         <div class="browser-left">
           <div class="dot"></div>
           <div class="dot"></div>
           <div class="dot"></div>
         </div>
-        <div class="address">the-bear-minimum.github.io</div>
+        <div class="address">the-bear-minimum.wixsite.com</div>
         <div class="browser-right">
           <div class="dot"></div>
         </div>
@@ -663,291 +608,196 @@
     <div class="site-wrap">
       <header class="header">
         <div class="brand" onclick="showSection('home')">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div class="brand-text">
-            <span>The Bear</span>
-            <span>Minimum</span>
+          <div class="brand-mark"></div>
+          <div class="brand-title">
+            The Bear
+            <small>Minimum</small>
           </div>
         </div>
 
         <nav class="nav" aria-label="Main navigation">
-          <a onclick="showSection('home')" class="nav-link active">Home</a>
-          <a onclick="showSection('blog')" class="nav-link">Blog</a>
-          <a onclick="showSection('invest')" class="nav-link">Invest</a>
+          <a href="#" class="nav-link active" onclick="showSection('home')">Home</a>
+          <a href="#" class="nav-link" onclick="showSection('blog')">Blog</a>
+          <a href="#" class="nav-link" onclick="showSection('invest')">Invest</a>
         </nav>
 
         <div></div>
       </header>
 
       <main class="section active" id="home">
-        <div class="hero">
+        <section class="hero">
           <h1>THE BEAR MINIMUM</h1>
-          <div class="subtitle">
+
+          <div class="hero-sub">
             <strong>Understanding Markets Without The Noise</strong>
           </div>
-          <div class="tagline">
-            We deliver digestible market analysis and investment insights for everyone. Clear thinking, grounded analysis, and actionable perspectives on the trends that matter.
+
+          <div class="hero-tagline">
+            We deliver digestible market analysis and investment insights for everyone.
           </div>
 
-          <div class="email-signup">
-            <input type="email" class="email-input" placeholder="Enter your email" id="emailInput" />
+          <div class="signup">
+            <input class="email-input" id="emailInput" type="email" placeholder="Enter your email" />
             <button class="btn" onclick="subscribeEmail()">Subscribe</button>
           </div>
-        </div>
+        </section>
 
-        <div class="hero-image" aria-label="City skyline hero image"></div>
+        <div class="hero-visual" aria-label="City skyline image"></div>
 
-        <div class="latest-articles">
-          <h2 class="section-title">Latest Articles</h2>
-          <div class="article-grid" id="latestArticles"></div>
-        </div>
+        <section class="latest">
+          <h2 class="section-head">Latest Articles</h2>
+          <div class="cards" id="latestArticles"></div>
+        </section>
       </main>
 
       <main class="section" id="blog">
-        <div class="blog-wrap">
-          <h2 class="section-title">Our Blog</h2>
-          <div class="blog-posts" id="blogPosts"></div>
-        </div>
+        <section class="blog-wrap">
+          <h2 class="section-head">All Posts</h2>
+          <div class="posts" id="blogPosts"></div>
+        </section>
       </main>
 
       <main class="section" id="invest">
-        <div class="invest-wrap">
-          <div class="trends-section">
-            <h2 class="section-title">Market Trends to Watch</h2>
-            <div class="trends-grid" id="trendsGrid"></div>
-          </div>
+        <section class="invest-wrap">
+          <h2 class="section-head">Market Trends to Watch</h2>
+          <div class="trend-grid" id="trendGrid"></div>
 
-          <div class="stocks-section">
-            <h2 class="section-title">Stocks Worth Watching</h2>
-            <div class="stocks-grid" id="stocksGrid"></div>
-          </div>
-        </div>
+          <div style="height: 22px;"></div>
+
+          <h2 class="section-head">Stocks Worth Watching</h2>
+          <div class="stock-grid" id="stockGrid"></div>
+        </section>
       </main>
     </div>
+
+    <footer>
+      © 2024 The Bear Minimum. Market insights for thoughtful investors.
+    </footer>
   </div>
 
-  <footer>
-    <p>&copy; 2024 The Bear Minimum. Market insights for thoughtful investors.</p>
-  </footer>
-
   <script>
-    const articlesData = [
+    const articles = [
       {
-        date: 'Oct 15, 2024',
+        date: 'Sep 29 • 4 min read',
         title: 'The Primitive Technology Behind Modern Finance',
-        excerpt: 'A deep dive into the legacy systems powering global markets and why they matter more than you think.',
+        excerpt: 'The Bear Minimum',
         author: 'The Bear Minimum',
-        readTime: '5 min read'
       },
       {
-        date: 'Oct 12, 2024',
-        title: 'Tech Sector Shift: What Rising Interest Rates Mean',
-        excerpt: 'Exploring how interest rate changes are reshaping valuations across technology stocks and what investors should watch.',
+        date: 'Sep 28 • 3 min read',
+        title: 'The Market Signal Everyone Misses',
+        excerpt: 'What the data tells us about resilience and disruption in the current cycle.',
         author: 'The Bear Minimum',
-        readTime: '7 min read'
       },
       {
-        date: 'Oct 8, 2024',
-        title: 'Energy Markets in Transition: The New Normal',
-        excerpt: 'Understanding the dynamics of energy commodities in a changing global landscape and the investment opportunities ahead.',
+        date: 'Sep 21 • 5 min read',
+        title: 'Why Passive Strategies Still Need Active Judgment',
+        excerpt: 'Index investing is powerful, but the real edge comes from understanding context.',
         author: 'The Bear Minimum',
-        readTime: '6 min read'
       }
     ];
 
-    const blogsData = [
-      {
-        date: 'Oct 15, 2024',
-        title: 'The Primitive Technology Behind Modern Finance',
-        excerpt: 'A deep dive into the legacy systems powering global markets and why they matter more than you think. From settlement delays to clearing procedures, the infrastructure...',
-        readTime: '5 min read'
-      },
-      {
-        date: 'Oct 12, 2024',
-        title: 'Tech Sector Shift: What Rising Interest Rates Mean',
-        excerpt: 'Exploring how interest rate changes are reshaping valuations across technology stocks. Higher rates impact discount rates used in valuation models, affecting growth stocks...',
-        readTime: '7 min read'
-      },
-      {
-        date: 'Oct 8, 2024',
-        title: 'Energy Markets in Transition: The New Normal',
-        excerpt: 'Understanding the dynamics of energy commodities in a changing global landscape. The shift towards renewables is creating new investment opportunities and challenges...',
-        readTime: '6 min read'
-      },
-      {
-        date: 'Oct 4, 2024',
-        title: 'Healthcare Investing: Demographics Shape the Future',
-        excerpt: 'Aging populations worldwide ensure consistent growth in medical testing and specialized nursing resources. This demographic shift creates structural tailwinds...',
-        readTime: '8 min read'
-      },
-      {
-        date: 'Sep 30, 2024',
-        title: 'Consumer Resilience: Household Budgets Under Pressure',
-        excerpt: 'Digital retail models demonstrate resilience even as household budgets tighten under current macro-economic costs. Understanding consumer behavior in this environment...',
-        readTime: '6 min read'
-      }
+    const posts = [
+      { date: 'Sep 29 • 4 min read', title: 'The Primitive Technology Behind Modern Finance', text: 'A look at the infrastructure and systems that still shape today’s financial world.' },
+      { date: 'Sep 28 • 3 min read', title: 'The Market Signal Everyone Misses', text: 'How to read the subtle changes in valuations, liquidity, and sentiment before the crowd catches on.' },
+      { date: 'Sep 21 • 5 min read', title: 'Why Passive Strategies Still Need Active Judgment', text: 'A practical framework for balancing low-cost investing with real-world context and risk awareness.' },
+      { date: 'Sep 16 • 6 min read', title: 'Healthcare Investing: Demographics and Long-Term Demand', text: 'Why aging populations, fixed costs, and innovation continue to support the sector.' },
+      { date: 'Sep 11 • 4 min read', title: 'Consumer Resilience in a Slower Economy', text: 'The most important question is not whether spending falls, but where it moves.' }
     ];
 
-    const trendsData = [
-      {
-        label: 'Technology',
-        title: 'AI and Silicon Architecture',
-        description: 'Advancements in silicon architecture and neural networking continue to fuel expansion throughout the tech landscape.'
-      },
-      {
-        label: 'Energy',
-        title: 'Renewable Energy Grid Transition',
-        description: 'The transition to sustainable utility grids is met by enduring demand and extraction limits in oil and gas heat.'
-      },
-      {
-        label: 'Finance',
-        title: 'Yield Margins & Decentralization',
-        description: 'Steadfast yield margins benefit top-tier lenders even as decentralized platforms challenge traditional workflows.'
-      },
-      {
-        label: 'Healthcare',
-        title: 'Aging Populations Globally',
-        description: 'Aging populations worldwide ensure consistent growth in medical testing and specialized nursing resources.'
-      },
-      {
-        label: 'Consumer',
-        title: 'Digital Retail Resilience',
-        description: 'Digital retail models demonstrate resilience while household budgets tighten under current macro-economic costs.'
-      },
-      {
-        label: 'Industrials',
-        title: 'Manufacturing & Logistics',
-        description: 'Local manufacturing initiatives and modernizing logistics networks create momentum for large-scale production groups.'
-      }
+    const trends = [
+      { label: 'Technology', text: 'Advancements in silicon architecture and neural networking continue to fuel expansion throughout the tech landscape.' },
+      { label: 'Energy', text: 'The transition to sustainable utility grids is met by enduring demand and extraction limits in oil and gas heat.' },
+      { label: 'Finance', text: 'Steadfast yield margins benefit top-tier lenders even as decentralized platforms challenge traditional workflows.' },
+      { label: 'Healthcare', text: 'Aging populations worldwide ensure consistent growth in medical testing and specialized nursing resources.' },
+      { label: 'Consumer', text: 'Digital retail models demonstrate resilience while household budgets tighten under current macro-economic costs.' },
+      { label: 'Industrials', text: 'Local manufacturing initiatives and modernizing logistics networks create momentum for large-scale production groups.' }
     ];
 
-    const stocksData = [
-      {
-        symbol: 'NVDA',
-        name: 'NVIDIA Corporation',
-        price: '$138.45',
-        trend: 'up',
-        change: '+12.3%',
-        note: 'AI chip demand driving growth'
-      },
-      {
-        symbol: 'TSLA',
-        name: 'Tesla Inc.',
-        price: '$242.80',
-        trend: 'down',
-        change: '-5.2%',
-        note: 'Market pullback on macro concerns'
-      },
-      {
-        symbol: 'MSFT',
-        name: 'Microsoft Corporation',
-        price: '$378.91',
-        trend: 'up',
-        change: '+8.7%',
-        note: 'Cloud growth + AI integration'
-      },
-      {
-        symbol: 'XLE',
-        name: 'Energy Sector ETF',
-        price: '$94.32',
-        trend: 'up',
-        change: '+3.4%',
-        note: 'Oil prices supporting valuations'
-      },
-      {
-        symbol: 'UNH',
-        name: 'UnitedHealth Group',
-        price: '$512.67',
-        trend: 'up',
-        change: '+6.8%',
-        note: 'Healthcare growth narrative intact'
-      },
-      {
-        symbol: 'XLY',
-        name: 'Consumer Discretionary ETF',
-        price: '$78.45',
-        trend: 'down',
-        change: '-2.1%',
-        note: 'Consumer spending showing signs of weakness'
-      }
+    const stocks = [
+      { symbol: 'NVDA', name: 'NVIDIA Corporation', price: '$138.45', trend: 'up', change: '+12.3%', note: 'AI chip demand driving growth.' },
+      { symbol: 'MSFT', name: 'Microsoft Corporation', price: '$378.91', trend: 'up', change: '+8.7%', note: 'Cloud and AI tailwinds remain strong.' },
+      { symbol: 'TSLA', name: 'Tesla Inc.', price: '$242.80', trend: 'down', change: '-5.2%', note: 'Macro concerns and margin pressure continue.' },
+      { symbol: 'XLE', name: 'Energy Sector ETF', price: '$94.32', trend: 'up', change: '+3.4%', note: 'Oil and gas strength supports the sector.' },
+      { symbol: 'UNH', name: 'UnitedHealth Group', price: '$512.67', trend: 'up', change: '+6.8%', note: 'Defensive healthcare demand remains resilient.' },
+      { symbol: 'XLY', name: 'Consumer Discretionary ETF', price: '$78.45', trend: 'down', change: '-2.1%', note: 'Consumers remain price-sensitive in a slower backdrop.' }
     ];
 
     function renderLatestArticles() {
-      const container = document.getElementById('latestArticles');
-      container.innerHTML = articlesData.map(article => `
-        <div class="article-card">
-          <div class="article-date">${article.date}</div>
+      const el = document.getElementById('latestArticles');
+      el.innerHTML = articles.map(article => `
+        <article class="card">
+          <div class="meta">${article.date}</div>
           <h3>${article.title}</h3>
           <p>${article.excerpt}</p>
-          <div class="article-author">${article.author} • ${article.readTime}</div>
-        </div>
+          <div class="card-author">${article.author}</div>
+        </article>
       `).join('');
     }
 
-    function renderBlogPosts() {
-      const container = document.getElementById('blogPosts');
-      container.innerHTML = blogsData.map(blog => `
-        <article class="blog-post">
-          <div class="blog-meta">${blog.date} • ${blog.readTime}</div>
-          <h2>${blog.title}</h2>
-          <p>${blog.excerpt}</p>
+    function renderPosts() {
+      const el = document.getElementById('blogPosts');
+      el.innerHTML = posts.map(post => `
+        <article class="post">
+          <div class="meta">${post.date}</div>
+          <h2>${post.title}</h2>
+          <p>${post.text}</p>
         </article>
       `).join('');
     }
 
     function renderTrends() {
-      const container = document.getElementById('trendsGrid');
-      container.innerHTML = trendsData.map(trend => `
-        <div class="trend-card">
+      const el = document.getElementById('trendGrid');
+      el.innerHTML = trends.map(trend => `
+        <article class="trend-card">
           <div class="trend-label">${trend.label}</div>
-          <h3>${trend.title}</h3>
-          <p>${trend.description}</p>
-        </div>
+          <h3>${trend.label}</h3>
+          <p>${trend.text}</p>
+        </article>
       `).join('');
     }
 
     function renderStocks() {
-      const container = document.getElementById('stocksGrid');
-      container.innerHTML = stocksData.map(stock => `
-        <div class="stock-card">
-          <div class="stock-header">
+      const el = document.getElementById('stockGrid');
+      el.innerHTML = stocks.map(stock => `
+        <article class="stock-card">
+          <div class="stock-row">
             <div>
               <div class="stock-symbol">${stock.symbol}</div>
               <div class="stock-name">${stock.name}</div>
             </div>
             <div class="stock-price">${stock.price}</div>
           </div>
-          <div class="stock-trend ${stock.trend}">${stock.trend === 'up' ? '↑' : '↓'} ${stock.change}</div>
+          <div class="pill ${stock.trend}">${stock.trend === 'up' ? '↑' : '↓'} ${stock.change}</div>
           <div class="stock-note">${stock.note}</div>
-        </div>
+        </article>
       `).join('');
     }
 
-    function showSection(sectionId) {
+    function showSection(id) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
+      document.getElementById(id).classList.add('active');
       document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-      const activeLink = Array.from(document.querySelectorAll('.nav-link')).find(link => link.textContent.toLowerCase() === sectionId);
-      if (activeLink) activeLink.classList.add('active');
-      window.scrollTo(0, 0);
+      const active = Array.from(document.querySelectorAll('.nav-link')).find(link => link.textContent.toLowerCase() === id);
+      if (active) active.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function subscribeEmail() {
-      const email = document.getElementById('emailInput').value;
-      if (email && email.includes('@')) {
-        alert(`Thanks for subscribing with ${email}!\n\nIn a real app, this would be sent to your backend.`);
-        document.getElementById('emailInput').value = '';
+      const input = document.getElementById('emailInput');
+      const value = input.value.trim();
+      if (value.includes('@')) {
+        alert('Thanks for subscribing with ' + value + '!');
+        input.value = '';
       } else {
-        alert('Please enter a valid email address');
+        alert('Please enter a valid email address.');
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderLatestArticles();
-      renderBlogPosts();
-      renderTrends();
-      renderStocks();
-    });
+    renderLatestArticles();
+    renderPosts();
+    renderTrends();
+    renderStocks();
   </script>
 </body>
 </html>
